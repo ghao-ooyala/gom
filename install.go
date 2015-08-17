@@ -214,7 +214,7 @@ func (gom *Gom) Checkout() error {
 		}
 		if vcs != nil {
 			p = filePath.Join(vendor, "src", gom.name)
-			customVendor, ok : = gom.options["vendor_path"].(string) {
+			customVendor, ok := gom.options["vendor_path"].(string) {
 				p = filepath.Join(p, gom.name)
 			}
 			return vcs.Sync(pc, commit_or_branch_or_tag)
