@@ -123,6 +123,11 @@ func (gom *Gom) Clone(args []string) error {
 		if err != nil {
 			return err
 		}
+		if has(gom.options, "skip_build") {
+			if gom.options["skip_build"].(string) == "true" {
+				return nil
+			}
+		}
 	} else if private, ok := gom.options["private"].(string); ok {
 		if private == "true" {
 			target, ok := gom.options["target"].(string)
