@@ -213,7 +213,7 @@ func (gom *Gom) Checkout() error {
 			vcs = bzr
 		}
 		if vcs != nil {
-			p = filePath.Join(vendor, "src", gom.name)
+			p = filepath.Join(vendor, "src", gom.name)
 			customVendor, ok := gom.options["vendor_path"].(string) 
 			if ok {
 				p = filepath.Join(p, gom.name)
