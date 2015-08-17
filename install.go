@@ -214,10 +214,11 @@ func (gom *Gom) Checkout() error {
 		}
 		if vcs != nil {
 			p = filePath.Join(vendor, "src", gom.name)
-			customVendor, ok := gom.options["vendor_path"].(string) {
+			customVendor, ok := gom.options["vendor_path"].(string) 
+			if ok {
 				p = filepath.Join(p, gom.name)
 			}
-			return vcs.Sync(pc, commit_or_branch_or_tag)
+			return vcs.Sync(p, commit_or_branch_or_tag)
 		}
 	}
 	fmt.Printf("Warning: don't know how to checkout for %v\n", gom.name)
