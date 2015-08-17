@@ -198,6 +198,10 @@ func (gom *Gom) Checkout() error {
 		return err
 	}
 	p := filepath.Join(vendor, "src")
+	customVendor, ok := gom.options["vendor_path"].(string)
+	if ok {
+		p = customVendor
+	}
 	for _, elem := range strings.Split(gom.name, "/") {
 		var vcs *vcsCmd
 		p = filepath.Join(p, elem)
@@ -209,14 +213,11 @@ func (gom *Gom) Checkout() error {
 			vcs = bzr
 		}
 		if vcs != nil {
-			p = filepath.Join(vendor, "src", gom.name)
-			fmt.Printf("+++====p is %s\n", p)
-			customVendor, ok := gom.options["vendor_path"].(string)
-                	if ok {
-				p = filepath.Join(customVendor, gom.name)
-				fmt.Printf("======p is %s\n", p)
+			p = filePath.Join(vendor, "src", gom.name)
+			customVendor, ok : = gom.options["vendor_path"].(string) {
+				p = filepath.Join(p, gom.name)
 			}
-			return vcs.Sync(p, commit_or_branch_or_tag)
+			return vcs.Sync(pc, commit_or_branch_or_tag)
 		}
 	}
 	fmt.Printf("Warning: don't know how to checkout for %v\n", gom.name)
