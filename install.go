@@ -108,13 +108,13 @@ func (gom *Gom) Clone(args []string) error {
 		if !ok {
 			target = gom.name
 		}
+		srcdir := filepath.Join(vendor, "src", target)
 		
 		customVendor, ok := gom.options["vendor_path"].(string)
 		if ok {
-			vendor = customVendor
+			srcdir = filepath.Join(customVendor, target)
 		}
 
-		srcdir := filepath.Join(vendor, "src", target)
 		customCmd := strings.Split(command, " ")
 		customCmd = append(customCmd, srcdir)
 
@@ -210,6 +210,10 @@ func (gom *Gom) Checkout() error {
 		}
 		if vcs != nil {
 			p = filepath.Join(vendor, "src", gom.name)
+			customVendor, ok := gom.options["vendor_path"].(string)
+                	if ok {
+				p = filepath.Join(customVendor, gom.name)
+			}
 			return vcs.Sync(p, commit_or_branch_or_tag)
 		}
 	}
