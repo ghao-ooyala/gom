@@ -108,6 +108,11 @@ func (gom *Gom) Clone(args []string) error {
 		if !ok {
 			target = gom.name
 		}
+		
+		customVendor, ok := gom.options["vendor_path"].(string)
+		if ok {
+			vendor = customVendor
+		}
 
 		srcdir := filepath.Join(vendor, "src", target)
 		customCmd := strings.Split(command, " ")
