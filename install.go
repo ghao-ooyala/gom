@@ -213,6 +213,7 @@ func (gom *Gom) Checkout() error {
 			customVendor, ok := gom.options["vendor_path"].(string)
                 	if ok {
 				p = filepath.Join(customVendor, gom.name)
+				fmt.Printf("======p is %s\n", p)
 			}
 			return vcs.Sync(p, commit_or_branch_or_tag)
 		}
