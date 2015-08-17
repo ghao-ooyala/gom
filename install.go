@@ -214,7 +214,7 @@ func (gom *Gom) Checkout() error {
 
 func (gom *Gom) Build(args []string) error {
 	if has(gom.options, "skip_build") {
-		if gom.options["skip_build"].string == "true" {
+		if gom.options["skip_build"].(string) == "true" {
 			return nil
 		}
 	}     
