@@ -210,6 +210,7 @@ func (gom *Gom) Checkout() error {
 		}
 		if vcs != nil {
 			p = filepath.Join(vendor, "src", gom.name)
+			fmt.Printf("+++====p is %s\n", p)
 			customVendor, ok := gom.options["vendor_path"].(string)
                 	if ok {
 				p = filepath.Join(customVendor, gom.name)
